@@ -1,0 +1,203 @@
+﻿@model Dictionary<string, FMS.Models.SOGodownViewModel>
+@{
+    ViewBag.Title = "Storage Office Stock Report";
+
+    const string format = "#,0";
+    //var StartDate = ViewBag.StartDate as DateTime?;
+    //var EndDate = ViewBag.EndDate as DateTime?;
+}
+
+<link rel="stylesheet" href="~/Content/reports.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="~/Content/print.css" type="text/css" media="print" />
+<div class="title">
+    @ViewBag.Title
+    <div class="float-right">
+        <span class="print-report"><a href="javascript:window.print()" class="btn btn-info btn-group"><i class="fa fa-print"></i> Print</a> &nbsp; <!--<div class="btn btn-info btn-group">
+            <a href="#" data-toggle="dropdown">Export</a>
+    <ul class="dropdown-menu " role="menu">
+        <li><a href="#" onclick="$('#customers').tableExport({type:'csv',escape:'false'});"> CSV</a></li>
+        <li><a href="#" onclick="$('#customers').tableExport({type:'txt',escape:'false'});"> TXT</a></li>
+        <li class="divider"></li>
+        <li><a href="#" onclick="$('#customers').tableExport({type:'excel',escape:'false'});">  XLS</a></li>
+        <li><a href="#" onclick="$('#customers').tableExport({type:'doc',escape:'false'});"> Word</a></li>
+        <li><a href="#" onclick="$('#customers').tableExport({type:'powerpoint',escape:'false'});"> PowerPoint</a></li>
+        <li class="divider"></li>
+        <li><a href="#" onclick="$('#customers').tableExport({type:'png',escape:'false'});"> PNG</a></li>
+        <li><a href="#" onclick="$('#customers').tableExport({type:'pdf',pdfFontSize:'12',escape:'false'});"> PDF</a></li>
+    </ul>
+</div>--> &nbsp; @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-info" })</span>
+</div>
+</div>
+
+@using (Html.BeginForm())
+{
+    <table class="filter-report">
+        <tr>
+            <th>Storage Office</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>@Html.DropDownList("StorageOfficeId", null, "-- All --", new { @class = "form-control" })</td>
+            <td>@Html.Editor("StartDate")</td>
+            <td>@Html.Editor("EndDate")</td>
+            <td><input type="submit" value="Refresh" class="btn btn-primary" /></td>
+        </tr>
+    </table>
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>Godown</th>
+        <th>O/B Bags</th>
+        <th>O/B Quantity (kg)</th>
+        <th>Quantity Received</th>
+        <th>Total Bags</th>
+        <th>Total Quantity (kg)</th>
+        <th>Quantity Dispatched</th>
+        <th>C/B Bags</th>
+        <th>C/B Quantity (kg)</th>
+    </tr>
+
+    @{
+        var bagsOpening = 0;
+        var qtyOpening = 0;
+
+        var bagsRecv = 0;
+        var qtyRecv = 0;
+
+        var bagsTotal = 0;
+        var qtyTotal = 0;
+
+        var bagsDisp = 0;
+        var qtyDisp = 0;
+
+        var bagsClosing = 0;
+        var qtyClosing = 0;
+    }
+
+    @foreach (var key in Model.Keys)
+    {
+
+        var godown = @Model[key];
+        bagsOpening += godown.OpeningBags;
+        qtyOpening += godown.OpeningQuantity;
+        bagsRecv += godown.BagsReceived;
+        qtyRecv += godown.QuantityReceived;
+        bagsDisp += godown.BagsDispatched;
+        qtyDisp += godown.QuantityDispatched;
+
+        <tr>
+            <td>@key</td>
+            <td class="text-right">@godown.OpeningBags.ToString(format)</td>
+            <td class="text-right">@godown.OpeningQuantity.ToString(format)</td>
+            <td>
+                <table>
+                    <tr>
+                        <td class="col-md-6">From</td>
+                        <td class="col-md-3 text-right">Bags</td>
+                        <td class="col-md-3 text-right">Kg</td>
+                    </tr>
+                    @foreach (var item in godown.ReceivedItems)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td class="text-right">@item.Bags.ToString(format)</td>
+                            <td class="text-right">@item.Quantity.ToString(format)</td>
+                        </tr>
+                    }
+                    <tr>
+                        <td>Total Received</td>
+                        <td class="text-right">@godown.BagsReceived.ToString(format)</td>
+                        <td class="text-right">@godown.QuantityReceived.ToString(format)</td>
+                    </tr>
+                </table>
+            </td>
+            <td class="text-right">
+                @{
+                    var rBags = godown.OpeningBags + godown.BagsReceived;
+                    bagsTotal += rBags;
+                }
+                @rBags.ToString(format)
+            </td>
+            <td class="text-right">
+                @{
+                    var rQty = godown.OpeningQuantity + godown.QuantityReceived;
+                    qtyTotal += rQty;
+                }
+                @rQty.ToString(format)
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td class="col-md-6">To</td>
+                        <td class="col-md-3 text-right">Bags</td>
+                        <td class="col-md-3 text-right">Kg</td>
+                    </tr>
+                    @foreach (var item in godown.DispatchedItems)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td class="text-right">@item.Bags.ToString(format)</td>
+                            <td class="text-right">@item.Quantity.ToString(format)</td>
+                        </tr>
+                    }
+                    <tr>
+                        <td>Total Dispatched</td>
+                        <td class="text-right">@godown.BagsDispatched.ToString(format)</td>
+                        <td class="text-right">@godown.QuantityDispatched.ToString(format)</td>
+                    </tr>
+                </table>
+            </td>
+            <td class="text-right">
+                @{
+                    var cBags = rBags - godown.BagsDispatched;
+                    bagsClosing += cBags;
+                }
+                @cBags.ToString(format)
+            </td>
+            <td class="text-right">
+                @{
+                    var cQty = rQty - godown.QuantityDispatched;
+                    qtyClosing += cQty;
+                }
+                @cQty.ToString(format)
+            </td>
+        </tr>
+    }
+
+    <tr class="bold">
+        <td>Grand Total</td>
+        <td class="text-right vertical-align-middle">@bagsOpening.ToString(format)</td>
+        <td class="text-right vertical-align-middle">@qtyOpening.ToString(format)</td>
+        <td class="vertical-align-middle">
+            <table class="borderless">
+                <tr>
+                    <td class="col-md-6"></td>
+                    <td class="col-md-3 text-right">@bagsRecv.ToString(format)</td>
+                    <td class="col-md-3 text-right">@qtyRecv.ToString(format)</td>
+                </tr>
+            </table>
+        </td>
+        <td class="text-right vertical-align-middle">@bagsTotal.ToString(format)</td>
+        <td class="text-right vertical-align-middle">@qtyTotal.ToString(format)</td>
+        <td class="vertical-align-middle">
+            <table class="borderless">
+                <tr>
+                    <td class="col-md-6"></td>
+                    <td class="col-md-3 text-right">@bagsDisp.ToString(format)</td>
+                    <td class="col-md-3 text-right">@qtyDisp.ToString(format)</td>
+                </tr>
+            </table>
+        </td>
+        <td class="text-right vertical-align-middle">@bagsClosing.ToString(format)</td>
+        <td class="text-right vertical-align-middle">@qtyClosing.ToString(format)</td>
+    </tr>
+
+</table>
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/exportpdf")
+}*@

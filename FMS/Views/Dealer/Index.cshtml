@@ -1,0 +1,50 @@
+﻿@using FMS.Models
+@using FMS.HtmlHelpers
+
+@model IEnumerable<FMS.Models.Dealer>
+
+@{
+    ViewBag.Title = "Dealers";
+}
+
+<div class="title">
+    @ViewBag.Title
+    <div class="float-right">
+        @Html.ActionLink("Add New", "Create", null, new { @class = "btn btn-primary" })
+    </div>
+</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Place.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Depot)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Place.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Depot.Place.Name)
+            </td>
+            <td>
+
+                @Html.ActionLink("Edit", "Edit", new { id = item.DealerId }) @Html.Raw(" | ")
+                @Html.ActionLink("Details", "Details", new { id = item.DealerId })
+                @if (User.HasLevel(UserLevel.SystemAdmin))
+                {
+                    @Html.Raw(" | ")
+                    @Html.ActionLink("Delete", "Delete", new { id = item.DealerId })
+                }
+            </td>
+        </tr>
+    }
+
+</table>

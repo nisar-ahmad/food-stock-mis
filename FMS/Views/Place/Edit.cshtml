@@ -1,0 +1,29 @@
+﻿@model FMS.Models.Place
+
+@{
+    ViewBag.Title = "Edit Place";
+}
+
+<div class="title">
+    @ViewBag.Title
+    <div class="float-right">
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" })
+    </div>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.EditorForModel()
+
+    <div class="col-md-offset-1">
+        <input type="submit" value="Save" class="btn btn-primary" /> | 
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+@Html.Partial("_PageCloseAlert")
+}

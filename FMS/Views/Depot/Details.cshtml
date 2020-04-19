@@ -1,0 +1,35 @@
+﻿@model FMS.Models.Depot
+@{
+    ViewBag.Title = "Depot Details";
+}
+<div class="title">
+    @ViewBag.Title
+    <div class="float-right">
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" })
+    </div>
+</div>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("District Office")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DistrictOffice.Place.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Bank Account")
+        </dt>
+
+        <dd>
+            @Model.BankAccount.Bank.BankName - @Model.BankAccount.Branch Branch - Account No. @Model.BankAccount.AccountNumber
+        </dd>
+    </dl>
+
+    @Html.DisplayFor(model => model.Place)
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DepotId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

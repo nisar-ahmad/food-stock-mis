@@ -1,0 +1,44 @@
+﻿@model IEnumerable<FMS.Models.Directorate>
+
+@{
+    ViewBag.Title = "Directorates";
+}
+
+<div class="title">
+    @ViewBag.Title
+    <div class="float-right">
+        @Html.ActionLink("Add New", "Create", null, new { @class = "btn btn-primary" })
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BankAccount.Branch)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Place.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BankAccount.Branch)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Place.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DirectorateId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.DirectorateId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DirectorateId })
+        </td>
+    </tr>
+}
+
+</table>

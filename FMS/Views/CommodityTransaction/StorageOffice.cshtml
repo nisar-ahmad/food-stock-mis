@@ -1,0 +1,189 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@using FMS.HtmlHelpers
+@model FMS.Models.SortableList<FMS.Models.CommodityTransaction>
+@{
+    ViewBag.Title = "Storage Office Transactions (PASSCO > Flour Mills)";
+    
+    var controller = ViewContext.RouteData.GetRequiredString("controller");
+    var action = ViewContext.RouteData.GetRequiredString("action");
+
+    var editAction = "SOReceive";
+    
+    var currentPage = 1;
+
+    if (!string.IsNullOrEmpty(Request["page"]))
+    {
+        currentPage = Convert.ToInt32(Request["page"]);
+    }
+
+    var i = 1;
+    var pageSize = FMS.Models.SortableList<object>.PageSize;
+}
+
+<div class="title">
+    @ViewBag.Title
+    <div class="float-right">
+        @Html.ActionLink("Receive from PASCO", "SOReceive", null, new { @class = "btn btn-primary" })
+        &nbsp;&nbsp;
+        @Html.ActionLink("Dispatch to Flour Mill", "SODispatch", null, new { @class = "btn btn-primary" })
+    </div>
+</div>
+
+@using (Html.BeginRouteForm(null, FormMethod.Get))
+{
+    @Html.Hidden("sortBy", Request["sortBy"])
+    @Html.Hidden("ascending", Request["ascending"])
+    <table class="table filtertable">
+        <tr class="filterstyle">
+            <td>Type</td>
+            <td>Commodity</td>
+            <td>From</td>
+            <td>To</td>
+            <td>Contractor</td>
+            <td>Dispatch Start</td>
+            <td>Dispatch End</td>
+            <td>Receive Start</td>
+            <td>Receive End</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>@Html.DropDownList("Type", ViewBag.Type as SelectList , "-- All Types --", new { @class = "form-control" })</td>
+            <td>@Html.DropDownList("CommodityTypeId", ViewBag.CommodityTypeId as SelectList, "-- All Commodities --", new { @class = "form-control" })</td>
+            <td>@Html.DropDownList("FromPlaceId", ViewBag.FromPlaceId as SelectList, "-- All From --", new { @class = "form-control" })</td>
+            <td>@Html.DropDownList("ToPlaceId", ViewBag.ToPlaceId as SelectList, "-- All To --", new { @class = "form-control" })</td>
+            <td>@Html.DropDownList("ContractorId", ViewBag.ContractorId as SelectList, "-- All Contractors --", new { @class = "form-control" })</td>
+            <td>@Html.Editor("DispatchDateStart", "DateTime")</td>
+            <td>@Html.Editor("DispatchDateEnd", "DateTime")</td>
+            <td>@Html.Editor("ReceiveDateStart", "DateTime")</td>
+            <td>@Html.Editor("ReceiveDateEnd", "DateTime")</td>
+            <td>
+                <input type="submit" name="Filter" value="Filter" class="btn btn-info btn-filter" />
+            </td>
+            <td>
+                @Html.ActionLink("Reset", action, controller, null, new { @class = "btn btn-small btn-warning btn-filter" })
+            </td>
+        </tr>
+    </table>
+}
+
+<table class="table sotable" id="customers2">
+    <tr>
+        <th>No.</th>
+        <th>
+            @Html.Partial("_SmartLink", Model, new ViewDataDictionary { { "ColumnName", "Type" }, { "DisplayName", "Type" } })
+        </th>
+        <th>
+            @Html.Partial("_SmartLink", Model, new ViewDataDictionary { { "ColumnName", "Status" }, { "DisplayName", "Status" } })
+        </th>
+        <th>
+            @Html.Partial("_SmartLink", Model, new ViewDataDictionary { { "ColumnName", "CommodityType.Name" }, { "DisplayName", "Commodity" } })
+        </th>
+        <th>
+            @Html.Partial("_SmartLink", Model, new ViewDataDictionary { { "ColumnName", "FromPlace.Name" }, { "DisplayName", "From" } })
+        </th>
+        <th>
+            @Html.Partial("_SmartLink", Model, new ViewDataDictionary { { "ColumnName", "ToPlace.Name" }, { "DisplayName", "To" } })
+        </th>
+        <th>
+            @Html.Partial("_SmartLink", Model, new ViewDataDictionary { { "ColumnName", "DispatchDate" }, { "DisplayName", "Dispatch Date" } })
+        </th>
+        <th>
+            @Html.Partial("_SmartLink", Model, new ViewDataDictionary { { "ColumnName", "ReceiveDate" }, { "DisplayName", "Receive Date" } })
+        </th>
+        <th class="text-right">
+            @Html.Partial("_SmartLink", Model, new ViewDataDictionary { { "ColumnName", "Bags" }, { "DisplayName", "Bags" } })
+        </th>
+        <th class="text-right">
+            @Html.Partial("_SmartLink", Model, new ViewDataDictionary { { "ColumnName", "Quantity" }, { "DisplayName", "Quantity" } })
+        </th>
+        <th>
+            @Html.Partial("_SmartLink", Model, new ViewDataDictionary { { "ColumnName", "Unit.Name" }, { "DisplayName", "Unit" } })
+        </th>
+        <th>
+            @Html.Partial("_SmartLink", Model, new ViewDataDictionary { { "ColumnName", "VoucherNo" }, { "DisplayName", "Voucher No" } })
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.PagedList)
+    {
+        <tr>
+            <td>@Html.Raw((currentPage - 1) * pageSize + i++) </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CommodityType.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FromPlace.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ToPlace.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DispatchDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReceiveDate)
+            </td>
+            <td class="text-right">
+                @Html.DisplayFor(modelItem => item.Bags)
+            </td>
+            <td class="text-right">
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Unit.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VoucherNo)
+            </td>
+            <td style="white-space:nowrap">
+                @if (item.Type == FMS.Models.CommodityTransactionType.Dispatch)
+                {
+                    editAction = "SODispatch";
+                }
+                else
+                {
+                    editAction = "SOReceive";
+                }
+
+                <p class="print-edit">
+                    <i class="fa fa-print"></i>&nbsp;@Html.ActionLink("Print", "PrintVoucher", new { id = item.CommodityTransactionId }) 
+                    <i class="fa fa-edit"></i>&nbsp;@Html.ActionLink("Edit", editAction, new { id = item.CommodityTransactionId })
+                    @*@Html.ActionLink("Delete", "Delete", new { id = item.CommodityTransactionId })*@
+                </p>
+            </td>
+        </tr>
+    }
+
+</table>
+
+<hr />
+
+@Html.PagedListPager((IPagedList)Model.PagedList, page => Url.Action("StorageOffice", page, Request.QueryString))
+
+<br />
+
+<a href="javascript:window.print()" class="btn btn-info btn-filter"><i class="fa fa-print"></i> &nbsp;Print</a> &nbsp;
+<a href="#" data-toggle="dropdown">
+    <div class="btn btn-info btn-group btn-filter btn-export">
+        <i class="fa fa-file-o"></i> &nbsp;Export
+        <ul class="dropdown-menu text-left" role="menu">
+            <li><a href="#" onclick="$('#customers2').tableExport({type:'excel',escape:'false'});">Excel</a></li>
+            <li><a href="#" onclick="$('#customers2').tableExport({type:'doc',escape:'false'});">Word</a></li>
+        </ul>
+    </div>
+</a>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/exportpdf")
+}

@@ -1,0 +1,121 @@
+﻿@{
+    ViewBag.Title = "";
+}
+
+@section head {
+    @Scripts.Render("~/bundles/highcharts")
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    
+    <div class="container row-wrapper3 slide-in-left">
+        <div class="row levels">
+            <div class="col-md-12 tile-in text-center dashboard-title title-white">
+                <i class="fa fa-cube rotate-in2"></i> DEPOTS DASHBOARD
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="row">
+        <div class="col-md-12 tile-in tile-in2 text-center tile-white bounce-in-left2">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 tile-in tile-in2 tile-white bounce-in-left2">
+            <a href="~/Reports/DepotByVoucher">
+                <div class="row tile0 tile-p text-center">
+                    <i class="fa fa-tasks rotate-in2"></i> &nbsp;DEPOT VOUCHER-WISE REPORTS
+                </div>
+            </a>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 tile-in tile-in2 tile-white bounce-in-left2">
+                <a href="~/Reports/DepotByDealer">
+                    <div class="row tile0 tile-p text-center">
+                        <i class="fa fa-tasks rotate-in2"></i> &nbsp;DEPOT DEALER-WISE REPORTS
+                    </div>
+                </a>
+            </div>
+
+
+        </div>
+    </div>
+
+    <br />
+
+    @*<div class="container row-wrapper6 slide-in-left">
+        <div class="row levels">
+            <div class="col-md-12 tile-in text-center">
+                <i class="fa fa-bar-chart rotate-in2"></i> &nbsp;STATISTICS - BAR CHARTS
+            </div>
+        </div>
+    </div>
+
+    <br />*@
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-8">
+                <table class="filter-report dashboard-filter">
+                    <tr>
+                        <th>Depot</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>@Html.DropDownList("DepotId", null, "-- All --", new { @class = "form-control" })</td>
+                        <td>@Html.Editor("StartDate")</td>
+                        <td>@Html.Editor("EndDate")</td>
+                        <td><input type="submit" value="Refresh" class="btn btn-primary" /></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+}
+
+<br />
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-8">
+            <table>
+                <tr>
+                    <td>
+                        @Html.Partial("_ChartPartial", ViewBag.BagsReceived as object)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.Partial("_ChartPartial", ViewBag.QuantityReceived as object)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.Partial("_ChartPartial", ViewBag.BagsDispatched as object)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.Partial("_ChartPartial", ViewBag.QuantityDispatched as object)
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
+
+
+

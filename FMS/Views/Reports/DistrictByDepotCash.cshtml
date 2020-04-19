@@ -1,0 +1,199 @@
+﻿@using FMS.Models
+@model CashReport
+@{
+    ViewBag.Title = "Consolidated Sale Account of Sector / District (Depot-Wise)";
+}
+
+<link rel="stylesheet" href="~/Content/reports.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="~/Content/print.css" type="text/css" media="print" />
+<div class="title">
+    @ViewBag.Title
+    <div class="float-right">
+        <a href="javascript:window.print()" class="btn btn-info"><i class="fa fa-print"></i> Print</a> &nbsp; @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-info" })<span class="print-report"></span>
+    </div>
+</div>
+
+@using (Html.BeginForm())
+{
+    <table class="filter-report">
+        <tr>
+            <th>Sector / District Office</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>@Html.DropDownList("DistrictOfficeId", null, "-- Select District Office --", new { @class = "form-control" })</td>
+            <td>@Html.Editor("StartDate")</td>
+            <td>@Html.Editor("EndDate")</td>
+            <td><input type="submit" value="Refresh" class="btn btn-primary" /></td>
+        </tr>
+    </table>
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>No.</th>
+        <th>Depot</th>
+        <th>Commodity</th>
+        <th>Bags Sold</th>
+        <th>Quantity Sold</th>
+        <th>Rate Per Bag</th>
+        <th>Amount Released</th>
+        <th>Total Amount</th>
+        <th>Amount Deposited</th>
+        <th>Name of Bank</th>
+        <th>Less</th>
+        <th>Excess</th>
+    </tr>
+
+    @{var i = 1;}
+
+    @foreach (var depot in Model.CashDetail.Keys)
+    {
+        <tr>
+            <td>@Html.Raw(i++)</td>
+            <td>@depot</td>
+
+            @{var depotCash = Model.CashDetail[depot];}
+
+            <td>
+                @foreach (var commodity in depotCash.CommoditiesSold.Keys)
+                {
+                    <table style="width:100%">
+                        <tr>
+                            <td style="white-space:nowrap">@commodity</td>
+                        </tr>
+                    </table>
+                }
+            </td>
+
+            <td>
+                @foreach (var commodity in depotCash.CommoditiesSold.Keys)
+                {
+                    var c = depotCash.CommoditiesSold[commodity];
+                    <table style="width:100%">
+                        <tr>
+                            <td class="text-right">@Html.DisplayFor(model => c.Bags)</td>
+                        </tr>
+                    </table>
+                }
+            </td>
+
+            <td>
+                @foreach (var commodity in depotCash.CommoditiesSold.Keys)
+                {
+                    var c = depotCash.CommoditiesSold[commodity];
+                    <table style="width:100%">
+                        <tr>
+                            <td class="text-right">@Html.DisplayFor(model => c.Quantity)</td>
+                        </tr>
+                    </table>
+                }
+            </td>
+
+            <td>
+                @foreach (var commodity in depotCash.CommoditiesSold.Keys)
+                {
+                    var c = depotCash.CommoditiesSold[commodity];
+                    <table style="width:100%">
+                        <tr>
+                            <td class="text-right" style="white-space:nowrap">@Html.DisplayFor(model => c.RatePerBag)</td>
+                        </tr>
+                    </table>
+                }
+            </td>
+
+            <td>
+                @foreach (var commodity in depotCash.CommoditiesSold.Keys)
+                {
+                    var c = depotCash.CommoditiesSold[commodity];
+                    <table style="width:100%">
+                        <tr>
+                            <td class="text-right">@Html.DisplayFor(model => c.AmountReleased)</td>
+                        </tr>
+                    </table>
+                }
+            </td>
+
+            <td class ="text-right">@Html.DisplayFor(model => depotCash.TotalAmount)</td>
+            <td class="text-right">@Html.DisplayFor(model => depotCash.AmountDeposited)</td>
+            <td>@Html.DisplayFor(model => depotCash.Bank)</td>
+            <td class="text-right">@Html.DisplayFor(model => depotCash.Less)</td>
+            <td class="text-right">@Html.DisplayFor(model => depotCash.Excess)</td>
+        </tr>
+    }
+
+    <tr class="bold">
+        <td></td>
+        <td>GRAND TOTAL</td>
+
+        @{var districtCash = Model.CashSummary;}
+
+        <td>
+            @foreach (var commodity in districtCash.CommoditiesSold.Keys)
+            {
+                <table style="width:100%">
+                    <tr>
+                        <td style="white-space:nowrap">@commodity</td>
+                    </tr>
+                </table>
+            }
+        </td>
+
+        <td>
+            @foreach (var commodity in districtCash.CommoditiesSold.Keys)
+            {
+                var c = districtCash.CommoditiesSold[commodity];
+                <table style="width:100%">
+                    <tr>
+                        <td class="text-right">@Html.DisplayFor(model => c.Bags)</td>
+                    </tr>
+                </table>
+            }
+        </td>
+
+        <td>
+            @foreach (var commodity in districtCash.CommoditiesSold.Keys)
+            {
+                var c = districtCash.CommoditiesSold[commodity];
+                <table style="width:100%">
+                    <tr>
+                        <td class="text-right">@Html.DisplayFor(model => c.Quantity)</td>
+                    </tr>
+                </table>
+            }
+        </td>
+
+        <td>
+            @foreach (var commodity in districtCash.CommoditiesSold.Keys)
+            {
+                var c = districtCash.CommoditiesSold[commodity];
+                <table style="width:100%">
+                    <tr>
+                        <td class="text-right" style="white-space:nowrap">@Html.DisplayFor(model => c.RatePerBag)</td>
+                    </tr>
+                </table>
+            }
+        </td>
+
+        <td>
+            @foreach (var commodity in districtCash.CommoditiesSold.Keys)
+            {
+                var c = districtCash.CommoditiesSold[commodity];
+                <table style="width:100%">
+                    <tr>
+                        <td class="text-right">@Html.DisplayFor(model => c.AmountReleased)</td>
+                    </tr>
+                </table>
+            }
+        </td>
+
+        <td class="text-right">@Html.DisplayFor(model => districtCash.TotalAmount)</td>
+        <td class="text-right">@Html.DisplayFor(model => districtCash.AmountDeposited)</td>
+        <td>@Html.DisplayFor(model => districtCash.Bank)</td>
+        <td class="text-right">@Html.DisplayFor(model => districtCash.Less)</td>
+        <td class="text-right">@Html.DisplayFor(model => districtCash.Excess)</td>
+    </tr>  
+
+</table>

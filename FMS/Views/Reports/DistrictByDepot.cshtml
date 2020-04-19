@@ -1,0 +1,173 @@
+﻿@model FMS.Models.DistrictByDepot
+@{
+    ViewBag.Title = "District Balance Statement (Depot-Wise)";
+}
+
+<link rel="stylesheet" href="~/Content/reports.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="~/Content/print.css" type="text/css" media="print" />
+<div class="title">
+    @ViewBag.Title
+    <div class="float-right">
+        <a href="javascript:window.print()" class="btn btn-info"><i class="fa fa-print"></i> Print</a> &nbsp; @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-info" })<span class="print-report"></span>
+    </div>
+</div>
+
+@using (Html.BeginForm())
+{
+    <table class="filter-report">
+        <tr>
+            <th>District Office</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>@Html.DropDownList("DistrictOfficeId", null, "-- Select District Office --", new { @class = "form-control" })</td>
+            <td>@Html.Editor("StartDate")</td>
+            <td>@Html.Editor("EndDate")</td>
+            <td><input type="submit" value="Refresh" class="btn btn-primary" /></td>
+        </tr>
+    </table>
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th></th>
+        <th colspan="2">Opening Balance</th>
+        <th colspan="2">Received</th>
+        <th colspan="2">Total</th>
+        <th colspan="2">Sold</th>        
+        <th colspan="2">Book Balance</th>
+        <th colspan="2">Shortages</th>
+        <th colspan="2">Ground Balance</th>
+    </tr>
+    <tr>
+        <th>Commodity</th>
+        <th>Bags</th>
+        <th>Kg</th>
+        <th>Bags</th>
+        <th>Kg</th>
+        <th>Bags</th>
+        <th>Kg</th>
+        <th>Bags</th>
+        <th>Kg</th>
+        <th>Bags</th>
+        <th>Kg</th>
+        <th>Bags</th>
+        <th>Kg</th>
+        <th>Bags</th>
+        <th>Kg</th>
+    </tr>
+
+    @foreach (var i in Model.DistrictSummary.Values)
+    {
+        <tr>
+            <td>@Html.DisplayFor(model => i.Commodity)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.OpeningBags)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.OpeningQuantity)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.ReceivedBags)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.ReceivedQuantity)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.TotalBags)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.TotalQuantity)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.DispatchedBags)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.DispatchedQuantity)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.BookBalanceBags)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.BookBalanceQuantity)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.ShortageBags)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.ShortageQuantity)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.GroundBalanceBags)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.GroundBalanceQuantity)</td>
+        </tr>
+     }
+</table>
+
+<table class="table table-bordered">
+    <tr>
+        <th></th>
+        <th></th>
+        <th colspan="2">Opening Balance</th>
+        <th colspan="2">Received</th>
+        <th colspan="2">Total</th>
+        <th colspan="2">Sold</th>
+        <th colspan="2">Book Balance</th>
+        <th colspan="2">Shortages</th>
+        <th colspan="2">Ground Balance</th>
+    </tr>
+    <tr>
+        <th>Depot</th>
+        <th>Commodity</th>
+        <th>Bags</th>
+        <th>Kg</th>
+        <th>Bags</th>
+        <th>Kg</th>
+        <th>Bags</th>
+        <th>Kg</th>
+        <th>Bags</th>
+        <th>Kg</th>
+        <th>Bags</th>
+        <th>Kg</th>
+        <th>Bags</th>
+        <th>Kg</th>
+        <th>Bags</th>
+        <th>Kg</th>
+    </tr>
+
+    @{var name = "";}
+
+    @foreach (var depot in Model.DepotSummary.Keys)
+    {
+        var summary = Model.DepotSummary[depot];
+        name = depot;
+        
+        foreach (var i in summary.CommoditySummary.Values)
+        {
+            <tr>
+                <td>@name</td>
+                <td>@Html.DisplayFor(model => i.Commodity)</td>
+                <td class="text-right">@Html.DisplayFor(model => i.OpeningBags)</td>
+                <td class="text-right">@Html.DisplayFor(model => i.OpeningQuantity)</td>
+                <td class="text-right">@Html.DisplayFor(model => i.ReceivedBags)</td>
+                <td class="text-right">@Html.DisplayFor(model => i.ReceivedQuantity)</td>
+                <td class="text-right">@Html.DisplayFor(model => i.TotalBags)</td>
+                <td class="text-right">@Html.DisplayFor(model => i.TotalQuantity)</td>
+                <td class="text-right">@Html.DisplayFor(model => i.DispatchedBags)</td>
+                <td class="text-right">@Html.DisplayFor(model => i.DispatchedQuantity)</td>
+                <td class="text-right">@Html.DisplayFor(model => i.BookBalanceBags)</td>
+                <td class="text-right">@Html.DisplayFor(model => i.BookBalanceQuantity)</td>
+                <td class="text-right">@Html.DisplayFor(model => i.ShortageBags)</td>
+                <td class="text-right">@Html.DisplayFor(model => i.ShortageQuantity)</td>
+                <td class="text-right">@Html.DisplayFor(model => i.GroundBalanceBags)</td>
+                <td class="text-right">@Html.DisplayFor(model => i.GroundBalanceQuantity)</td>
+            </tr>
+        
+            name = "";
+        }        
+    }
+
+    @{name = "GRAND TOTAL";}
+
+    @foreach (var i in Model.DistrictSummary.Values)
+    {
+        <tr class="bold">
+            <td>@name</td>
+            <td>@Html.DisplayFor(model => i.Commodity)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.OpeningBags)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.OpeningQuantity)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.ReceivedBags)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.ReceivedQuantity)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.TotalBags)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.TotalQuantity)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.DispatchedBags)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.DispatchedQuantity)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.BookBalanceBags)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.BookBalanceQuantity)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.ShortageBags)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.ShortageQuantity)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.GroundBalanceBags)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.GroundBalanceQuantity)</td>
+        </tr>
+
+        name = "";
+    }    
+
+</table>

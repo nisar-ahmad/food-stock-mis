@@ -1,0 +1,74 @@
+﻿@model FMS.Models.DepotDamage
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DepotDamage</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CommodityType.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommodityType.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Depot.DepotId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Depot.DepotId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Unit.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Unit.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DamageType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DamageType.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DamageDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DamageDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bags)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bags)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DepotDamageId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

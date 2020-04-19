@@ -1,0 +1,41 @@
+﻿@model IEnumerable<FMS.Models.Contractor>
+
+@{
+    ViewBag.Title = "Contractors";
+}
+
+<div class="title">
+    @ViewBag.Title
+    <div class="float-right">
+        @Html.ActionLink("Add New", "Create", null, new { @class = "btn btn-primary" })
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ContractorType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Place.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContractorType.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Place.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ContractorId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ContractorId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ContractorId })
+        </td>
+    </tr>
+}
+
+</table>

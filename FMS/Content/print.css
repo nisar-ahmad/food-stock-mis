@@ -1,0 +1,42 @@
+﻿.navbar { display:none;
+}
+
+.nav2 { display:none;
+}
+.navbar-nav ul { display:none;
+}
+.navbar-nav li { display:none;
+}
+.nav ul { display:none;
+}
+.nav li { display:none;
+}
+.footercss { display:none;
+} 
+.profile-bar { display:none;
+} 
+.print-report { display:none;
+} 
+.filter-report { display:none;
+} 
+.float-right { display:none;
+} 
+.body-content {margin-top:0px;}
+
+.navbar-brand {display:block;
+}
+.body-content {margin-top:10px;}
+#printDate {
+    display: block;
+}
+.printURL {
+    display: block;
+}
+.footercss { display:none;
+}
+.prefooter { display:none;
+}
+.row-wrapper {display:none;
+}
+
+

@@ -1,0 +1,100 @@
+﻿@model IEnumerable<FMS.Models.CommodityTransaction>
+@{
+    ViewBag.Title = "Shipments";
+}
+
+<div class="title">
+    @ViewBag.Title
+    <div class="float-right">
+        @Html.ActionLink("Add New", "Create", null, new { @class = "btn btn-primary" })
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CommodityType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FromPlace)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ToPlace)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DispatchDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReceiveDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bags)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Unit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VoucherNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompositeKey)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CommodityType.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FromPlace.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ToPlace.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DispatchDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReceiveDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bags)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Unit.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VoucherNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompositeKey)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CommodityTransactionId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CommodityTransactionId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CommodityTransactionId })
+        </td>
+    </tr>
+}
+
+</table>

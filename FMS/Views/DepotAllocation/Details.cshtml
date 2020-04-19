@@ -1,0 +1,70 @@
+﻿@model FMS.Models.DepotAllocation
+
+@{
+    ViewBag.Title = "Depot Allocation Details";
+}
+
+<div class="title">
+    @ViewBag.Title
+    <div class="float-right">
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" })
+    </div>
+</div>
+
+<div>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Depot.DepotId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Depot.Place.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FlourMill)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FlourMill.Place.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Unit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Unit.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CommodityType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommodityType.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Month)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Month)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DepotAllocationId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

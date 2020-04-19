@@ -1,0 +1,285 @@
+﻿@model FMS.Models.CommodityTransaction
+
+@{
+    ViewBag.Title = "Print Voucher";
+}
+<link rel="stylesheet" href="~/Content/print-voucher.css" rel="stylesheet" media="print" />
+
+
+
+<div class="row">
+
+    <div class="col-md-4">
+        <div class="row printbtn voucherstyle-in">
+            <div class="printcom">
+                <span class="print-report"><a href="javascript:window.print()" class="btn btn-info"><i class="fa fa-print"></i> Print</a></span>
+            </div>
+        </div>
+        <div class="row voucherstyle-in">
+            <!--<br />
+            <img src="~/Content/img/ajk-logo.png" class="ajkGovLogo" />-->
+            <h1>FOOD DEPARTMENT</h1>
+            <h1>AZAD GOVT. OF THE STATE <br />OF JAMMU & KASHMIR</h1>
+            <h1>Receipt & Issue Voucher</h1>
+        </div>
+        <div class="row vouchertable">
+            <!--          <dl class="dl-horizontal voucherstyle">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.BookNumber)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.BookNumber)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.VoucherNo)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.VoucherNo)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.DispatchDate)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.DispatchDate)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayName("Name of Station")
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.FromPlace.Name)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayName("Name of Destination")
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.ToPlace.Name)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayName("Article Sent")
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.CommodityType.Name)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayName("Bags")
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Bags)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayName("Quantity")
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Quantity)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Unit)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Unit.Name)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayName("Number of Trucks")
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Trucks)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayName("Number of Driver or Contractor")
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Contractor.Place.Name)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayName("Signature of Issuing Officer")
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.IssuingOfficer.Name)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayName("Signature of Driver/Contractor")
+                            </dt>
+
+                            <dd>
+
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayName("Date of Receipt")
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.ReceiveDate)
+                            </dd>
+                            <dt>
+                                @Html.DisplayName("Name of Destination")
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.ToPlace.Name)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayName("Bags Received")
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.BagsReceived)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayName("Quantity Received")
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.QuantityReceived)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayName("Reasons for shortage")
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.ReasonsForShortage)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayName("Signature of Receiving Officer")
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.ReceivingOfficer.Name)
+                            </dd>
+                        </dl>-->
+            <table class="table table-bordered voucherstyle" id="customers">
+                <tbody>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.BookNumber)        </td>
+                        <td>@Html.DisplayFor(model => model.BookNumber)        </td>
+
+                    </tr>
+                    <tr>
+                        <td>                     @Html.DisplayName("Voucher No")        </td>
+                        <td>                    @Html.DisplayFor(model => model.VoucherNo)        </td>
+                    </tr>
+                    <tr>
+                        <td>                     @Html.DisplayNameFor(model => model.DispatchDate)        </td>
+                        <td>                     @Html.DisplayFor(model => model.DispatchDate)        </td>
+                    </tr>
+
+                    <tr>
+                        <td>                     @Html.DisplayName("Name of Station")        </td>
+                        <td>                     @Html.DisplayFor(model => model.FromPlace.Name)        </td>
+                    </tr>
+                    <tr>
+                        <td>                     @Html.DisplayName("Name of Destination")        </td>
+                        <td>                     @Html.DisplayFor(model => model.ToPlace.Name)        </td>
+                    </tr>
+                    <tr>
+                        <td>                     @Html.DisplayName("Article Sent")        </td>
+                        <td>                     @Html.DisplayFor(model => model.CommodityType.Name)        </td>
+                    </tr>
+                    <tr>
+                        <td>                     @Html.DisplayName("Bags")        </td>
+                        <td>                     @Html.DisplayFor(model => model.Quantity)        </td>
+
+                    </tr>
+                    <tr>
+                        <td>                     @Html.DisplayName("Quantity")        </td>
+                        <td>                     @Html.DisplayFor(model => model.Unit.Name)        </td>
+                    </tr>
+                    <tr>
+                        <td>                     @Html.DisplayName("Trucks")        </td>
+                        <td>                        @Html.DisplayFor(model => model.Trucks)</td>
+                    </tr>
+                    <tr>
+                        <td>                     @Html.DisplayName("Drivers/Contractors")        </td>
+                        <td>                        @Html.DisplayFor(model => model.Contractor.Place.Name)</td>
+                    </tr>
+                    <tr>
+                        <td>                     @Html.DisplayName("Driver/Contractor Sign")        </td>
+                        <td>                     @Html.DisplayFor(model => model.Contractor.Place.Name)        </td>
+
+                    </tr>
+                    <tr>
+                        <td>                     @Html.DisplayName("Issuing Officer Sign")        </td>
+                        <td>                     @Html.DisplayFor(model => model.IssuingOfficer.Name)        </td>
+                    </tr>
+                    <tr>
+                        <td>                     @Html.DisplayName("Date of Receipt")        </td>
+                        <td>                     @Html.DisplayFor(model => model.ReceiveDate)        </td>
+                    </tr>
+                    <tr>
+                        <td>                     @Html.DisplayName("Name of Destination")        </td>
+                        <td>                     @Html.DisplayFor(model => model.ToPlace.Name)        </td>
+                    </tr>
+                    <tr>
+                        <td>                     @Html.DisplayName("Bags Received")        </td>
+                        <td>                     @Html.DisplayFor(model => model.BagsReceived)        </td>
+                    </tr>
+                    <tr>
+                        <td>                     @Html.DisplayName("Quantity Received")        </td>
+                        <td>                     @Html.DisplayFor(model => model.QuantityReceived)        </td>
+                    </tr>
+                    <tr>
+                        <td>                     @Html.DisplayName("Reasons for shortage")        </td>
+                        <td>                     @Html.DisplayFor(model => model.ReasonsForShortage)        </td>
+                    </tr>
+                    <tr>
+                        <td>                     @Html.DisplayName("Receiving Officer Sign")        </td>
+                        <td>                     @Html.DisplayFor(model => model.ReceivingOfficer.Name)        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>
+<!--<div id="printDate"></div>
+        <div class="printURL">
+            <script>
+                document.write(location.href);
+</script>
+</div>-->
+<!--<div class="printTitle">
+    <script>
+    document.write(document.title);
+    </script>
+</div>-->
+<!--<script>
+    var date = new Date();
+    var n = date.toDateString();
+    var time = date.toLocaleTimeString();
+
+    document.getElementById('printDate').innerHTML = n + ' ' + time;
+</script>-->
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/exportpdf")
+}
+

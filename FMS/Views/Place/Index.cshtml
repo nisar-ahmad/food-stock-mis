@@ -1,0 +1,106 @@
+﻿@model IEnumerable<FMS.Models.Place>
+
+@{
+    ViewBag.Title = "Places";
+}
+
+<div class="title">@ViewBag.Title
+    <div class="float-right">
+        @Html.ActionLink("Add New", "Create", null, new { @class = "btn btn-primary" })
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Landline)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fax)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Province)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.District)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Tehsil)
+        </th>
+
+        @*<th>
+                @Html.DisplayNameFor(model => model.UnionCouncil.Name)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.InchargePerson)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.Geography)
+            </th>*@
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Landline)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Province.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.District.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tehsil.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InchargePerson.Name)
+            </td>
+
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.UnionCouncil.Name)
+                </td>*@
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.Geography)
+                </td>*@
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.PlaceId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.PlaceId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.PlaceId })
+            </td>
+        </tr>
+    }
+
+</table>

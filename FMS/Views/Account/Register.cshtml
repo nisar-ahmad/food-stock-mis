@@ -1,0 +1,72 @@
+﻿@model FMS.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2 class="login-title bounce-in-right">@ViewBag.Title.</h2>
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4 class="login-title bounce-in-right">Create a new account.</h4>
+    <br />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label login-title" })
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.UserName, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label login-title" })
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control " } })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label login-title" })
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.Password, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label login-title" })
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.UserLevel, new { @class = "col-md-2 control-label login-title" })
+        <div class="col-md-10">
+            @Html.DropDownList("UserLevel", null, htmlAttributes: new { id = "LevelDropDown", @class = "form-control" })
+        </div>
+    </div>
+    <div id="DistrictGroup" class="form-group">
+        @Html.LabelFor(m => m.PlaceId, new { @class = "col-md-2 control-label login-title" })
+        <div class="col-md-10">
+            @Html.DropDownList("PlaceId", null, htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-primary login-title" value="Register" />
+            <input type="reset" class="btn btn-danger login-title" value="Reset" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+            $('#LevelDropDown').on('change', function () {
+                if (this.value == "District")
+                    $('#DistrictGroup').show();
+                else
+                    $('#DistrictGroup').hide();
+            });
+        });
+    </script>
+
+}

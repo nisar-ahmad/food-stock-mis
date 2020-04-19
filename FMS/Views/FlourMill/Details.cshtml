@@ -1,0 +1,37 @@
+﻿@model FMS.Models.FlourMill
+
+@{
+    ViewBag.Title = "Flour Mill Details";
+}
+<div class="title">
+    @ViewBag.Title
+    <div class="float-right">
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" })
+    </div>
+</div>
+
+<div>
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Place.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Place.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DistrictOffice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DistrictOffice.Place.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.FlourMillId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

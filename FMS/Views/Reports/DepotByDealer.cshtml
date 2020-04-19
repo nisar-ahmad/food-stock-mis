@@ -1,0 +1,160 @@
+﻿@model FMS.Models.DepotByDealer
+@{
+    ViewBag.Title = "Depot Balance Statement (Dealer-Wise)";
+}
+
+<link rel="stylesheet" href="~/Content/reports.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="~/Content/print.css" type="text/css" media="print" />
+<div class="title">
+    @ViewBag.Title
+    <div class="float-right">
+        <a href="javascript:window.print()" class="btn btn-info btn-group"><i class="fa fa-print"></i> Print</a> &nbsp; @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-info" })<span class="print-report"></span>
+    </div>
+</div>
+
+@using (Html.BeginForm())
+{
+    <table class="filter-report">
+        <tr>
+            <th>Depot</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>@Html.DropDownList("PlaceId", null, "-- Select Depot --", new { @class = "form-control" })</td>
+            <td>@Html.Editor("StartDate")</td>
+            <td>@Html.Editor("EndDate")</td>
+            <td><input type="submit" value="Refresh" class="btn btn-primary" /></td>
+        </tr>
+    </table>
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th></th>
+        <th colspan="2">Opening Balance</th>
+        <th colspan="2">Received</th>
+        <th colspan="2">Total</th>
+        <th colspan="2">Sold</th>        
+        <th colspan="2">Book Balance</th>
+        <th colspan="2">Shortages</th>
+        <th colspan="2">Ground Balance</th>
+    </tr>
+    <tr>
+        <th>Commodity</th>
+        <th>Bags</th>
+        <th>Kg</th>
+        <th>Bags</th>
+        <th>Kg</th>
+        <th>Bags</th>
+        <th>Kg</th>
+        <th>Bags</th>
+        <th>Kg</th>
+        <th>Bags</th>
+        <th>Kg</th>
+        <th>Bags</th>
+        <th>Kg</th>
+        <th>Bags</th>
+        <th>Kg</th>
+    </tr>
+
+    @foreach (var i in Model.SummaryItems.Values)
+    {
+        <tr>
+            <td>@Html.DisplayFor(model => i.Commodity)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.OpeningBags)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.OpeningQuantity)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.ReceivedBags)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.ReceivedQuantity)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.TotalBags)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.TotalQuantity)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.DispatchedBags)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.DispatchedQuantity)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.BookBalanceBags)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.BookBalanceQuantity)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.ShortageBags)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.ShortageQuantity)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.GroundBalanceBags)</td>
+            <td class="text-right">@Html.DisplayFor(model => i.GroundBalanceQuantity)</td>
+        </tr>
+     }
+</table>
+
+<table class="table2columns">
+    <tr>
+        <td>
+            <table class="table table-bordered">
+                <tr>
+                    <th colspan="6">RECEIVED FROM FLOUR MILL</th>
+                </tr>
+                <tr>
+                    <th>Flour Mill</th>
+                    <th>Commodity</th>
+                    <th>Bags</th>
+                    <th>Kg</th>
+                </tr>
+
+                @foreach (var item in Model.CommodityDetail.ReceivedItems)
+                {
+                    var name = item.PlaceName;
+                         
+                    foreach (var i in item.Items)
+                    {
+                        <tr>
+                            <td>@name</td>
+                            <td>@Html.DisplayFor(model => i.Commodity)</td>
+                            <td class="text-right">@Html.DisplayFor(model => i.Bags)</td>
+                            <td class="text-right">@Html.DisplayFor(model => i.Quantity)</td>
+                        </tr>
+                        
+                        name = "";
+                    }
+
+                }
+                <tr class="bold">
+                    <td class="text-right" colspan="2">Grand Total</td>
+                    <td class="text-right">@Html.DisplayFor(model => Model.CommodityDetail.GrandTotalBagsReceived)</td>
+                    <td class="text-right">@Html.DisplayFor(model => Model.CommodityDetail.GrandTotalQuantityReceived)</td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <table class="table table-bordered">
+                <tr>
+                    <th colspan="6">SOLD TO DEALER</th>
+                </tr>
+                <tr>
+                    <th>Dealer</th>
+                    <th>Commodity</th>
+                    <th>Bags</th>
+                    <th>Kg</th>
+                </tr>
+
+                @foreach (var item in Model.CommodityDetail.DispatchedItems)
+                {
+                    var name = item.PlaceName;
+
+                    foreach (var i in item.Items)
+                    {
+                        <tr>
+                            <td>@name</td>
+                            <td>@Html.DisplayFor(model => i.Commodity)</td>
+                            <td class="text-right">@Html.DisplayFor(model => i.Bags)</td>
+                            <td class="text-right">@Html.DisplayFor(model => i.Quantity)</td>
+                        </tr>
+
+                        name = "";
+                    }
+
+                }
+                <tr class="bold">
+                    <td class="text-right" colspan="2">Grand Total</td>
+                    <td class="text-right">@Html.DisplayFor(model => Model.CommodityDetail.GrandTotalBagsDispatched)</td>
+                    <td class="text-right">@Html.DisplayFor(model => Model.CommodityDetail.GrandTotalQuantityDispatched)</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+

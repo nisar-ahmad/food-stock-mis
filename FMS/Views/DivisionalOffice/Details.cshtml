@@ -1,0 +1,19 @@
+﻿@model FMS.Models.DivisionalOffice
+
+@{
+    ViewBag.Title = "Divisional Office Details";
+}
+
+<div class="title">
+    @ViewBag.Title
+    <div class="float-right">
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" })
+    </div>
+</div>
+
+@Html.DisplayFor(model => model.Place)
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DivisionalOfficeId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

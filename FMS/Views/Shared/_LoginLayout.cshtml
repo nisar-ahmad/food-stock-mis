@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style type="text/css">
+        body {
+            background: url(https://upload.wikimedia.org/wikipedia/commons/0/0d/Nanga_parbat,_Pakistan_by_gul791.jpg);
+        }
+    </style>    
+</head>
+
+<body class="login-bg">
+    <div class="navbar navbar-inverse navbar-fixed-top pull-right nav2">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="~/"><img src="~/Content/img/fms-logo3.png" width="250" height="63"></a>
+            </div>
+            <div class="navbar-collapse collapse navcol pull-right navshiftdown">
+
+            </div>
+        </div>
+    </div>
+    <div class="container body-content login-bg">
+        @RenderBody()
+        <br />
+        <br />
+
+        <footer class="footercss">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; @DateTime.Now.Year - AJK Food Stock Monitoring System</p>
+                </div>
+                <div class="col-md-6 text-right">
+                    <p>Made by <a href="http://nrtdcorp.com/" target="_blank">NRTD Corporation</a>.</p>
+                </div>
+            </div>
+        </footer>
+        <br />
+        <br />
+    </div>
+    <div class="profile-bar">
+        @Html.Partial("_LoginPartial")
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.datepicker').datepicker({ autoclose: true, format: 'dd-M-yyyy' });
+
+        });
+    </script>
+</body>
+</html>

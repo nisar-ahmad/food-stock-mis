@@ -1,0 +1,15 @@
+﻿<script>
+    var submitted = false;
+
+    $("form").submit(function () {
+        submitted = true;
+    });
+
+    $(window).bind('beforeunload', function (e) {
+
+        // Your code and validation
+        if (confirm && !submitted) {
+            return "Form changes will be lost!";
+        }
+    });
+</script>

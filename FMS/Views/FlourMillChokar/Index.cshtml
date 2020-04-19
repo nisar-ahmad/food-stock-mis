@@ -1,0 +1,58 @@
+﻿@model IEnumerable<FMS.Models.FlourMillChokar>
+
+@{
+    ViewBag.Title = "Flour Mill Grinding History";
+}
+
+<div class="title">
+    @ViewBag.Title
+    <div class="float-right">
+        @Html.ActionLink("Add New", "Create", null, new { @class = "btn btn-primary" })
+    </div>
+</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FlourMill)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductionDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bags)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Unit)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FlourMill.Place.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductionDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bags)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Unit.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.FlourMillChokarId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.FlourMillChokarId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.FlourMillChokarId })
+        </td>
+    </tr>
+}
+
+</table>

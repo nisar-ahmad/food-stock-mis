@@ -1,0 +1,39 @@
+﻿@model FMS.Models.StorageOffice
+
+@{
+    ViewBag.Title = "Edit Storage Office";
+}
+
+<div class="title">
+    @ViewBag.Title
+    <div class="float-right">
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" })
+    </div>
+</div>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @Html.Hidden("DirectorateId", 1)
+
+        @Html.HiddenFor(model => model.StorageOfficeId)
+        @Html.HiddenFor(model => model.PlaceId)
+        @Html.EditorFor(model => model.Place, new { PlaceId = Model.PlaceId })
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary" /> | @Html.ActionLink("Back to List", "Index")
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+@Html.Partial("_PageCloseAlert")
+}

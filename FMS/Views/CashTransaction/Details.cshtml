@@ -1,0 +1,138 @@
+﻿@model FMS.Models.CashTransaction
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CashTransaction</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BankAccount.Branch)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BankAccount.Branch)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CommodityTransaction.CompositeKey)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommodityTransaction.CompositeKey)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CommodityType.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommodityType.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Place.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Place.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Unit.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Unit.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompositeKey)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompositeKey)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CashVoucherNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CashVoucherNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ToPlaceId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ToPlaceId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TransactionDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TransactionDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bags)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bags)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CashTransactionId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

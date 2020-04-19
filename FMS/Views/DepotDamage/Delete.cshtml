@@ -1,0 +1,80 @@
+﻿@model FMS.Models.DepotDamage
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>DepotDamage</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CommodityType.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommodityType.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Depot.DepotId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Depot.DepotId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Unit.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Unit.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DamageType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DamageType.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DamageDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DamageDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bags)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bags)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,94 @@
+﻿@model IEnumerable<FMS.Models.CashTransaction>
+
+@{
+    ViewBag.Title = "Depot Payments";
+}
+
+<div class="title">
+    @ViewBag.Title
+    <div class="float-right">
+        @Html.ActionLink("Add Payment", "Depot", "CashTransaction", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Shipments", "Depot", "CommodityTransaction", null, new { @class = "btn btn-info" })
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Depot")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CashVoucherNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TransactionDate)
+        </th>
+        <th class="text-right">
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BankAccount.Bank)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BankAccount.AccountNumber)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.CommodityType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Unit)
+        </th>
+        <th class="text-right">
+            @Html.DisplayNameFor(model => model.Bags)
+        </th>
+        <th class="text-right">
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rate)
+        </th>*@
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FromPlace.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CashVoucherNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TransactionDate)
+        </td>
+        <td class="text-right">
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BankAccount.Bank.BankName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BankAccount.AccountNumber)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.CommodityType.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Unit.Name)
+        </td>
+        <td class="text-right">
+            @Html.DisplayFor(modelItem => item.Bags)
+        </td>
+        <td class="text-right">
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rate)
+        </td>*@
+        <td>
+            @Html.ActionLink("Edit", "Depot", new { id=item.CashTransactionId }) @*|
+            @Html.ActionLink("Delete", "Delete", new { id=item.CashTransactionId })*@
+        </td>
+    </tr>
+}
+</table>

@@ -1,0 +1,30 @@
+﻿@model FMS.Models.Contractor
+
+@{
+    ViewBag.Title = "Contractor Details";
+}
+<div class="title">
+    @ViewBag.Title
+    <div class="float-right">
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" })
+    </div>
+</div>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ContractorType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContractorType.Name)
+        </dd>
+
+    </dl>
+
+    @Html.DisplayFor(model => model.Place)
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ContractorId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

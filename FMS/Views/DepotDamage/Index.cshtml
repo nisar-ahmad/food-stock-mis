@@ -1,0 +1,71 @@
+﻿@model IEnumerable<FMS.Models.DepotDamage>
+
+@{
+    ViewBag.Title = "Depot - Damaged Stock";
+}
+
+<div class="title">
+    @ViewBag.Title
+    <div class="float-right">
+        @Html.ActionLink("Add Damage", "Create", null, new { @class = "btn btn-primary" })
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Depot)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CommodityType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Unit.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DamageType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DamageDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bags)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Depot.Place.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CommodityType.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Unit.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DamageType.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DamageDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bags)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DepotDamageId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.DepotDamageId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DepotDamageId })
+        </td>
+    </tr>
+}
+
+</table>

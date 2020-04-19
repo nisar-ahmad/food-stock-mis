@@ -1,0 +1,35 @@
+﻿.navbar { display:none;
+}
+
+.nav2 { display:none;
+}
+.navbar-nav ul { display:none;
+}
+.navbar-nav li { display:none;
+}
+.nav ul { display:none;
+}
+.nav li { display:none;
+}
+.print-report { display:none;
+} 
+.profile-bar { display:none;
+} 
+.body-content {margin-top:10px;}
+.vouchertable {width:50%;}
+.footercss p {text-align:left; margin-top:0px; font-size:12px;}
+.footercss {margin-bottom:-30px;
+}
+#printDate {
+    display: none;
+}
+.printURL {
+    display: none;
+}
+.footercss { display:none;
+}
+.prefooter { display:none;
+}
+.ajkGovLogo {display:block;
+}
+.printcom {display:none;}
